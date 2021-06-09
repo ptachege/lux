@@ -1,0 +1,358 @@
+{% extends "tutor/base.html" %}
+{% block content %}
+{% load static  %}
+<div class="content-wrapper">
+<!-- Page header -->
+<div class="page-header page-header-light">
+   <div class="page-header-content header-elements-md-inline">
+      <div class="page-title d-flex">
+         <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Paper {{papers.id}}</h4>
+         <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+      </div>
+      {% comment %} 
+      <div class="header-elements d-none">
+         <div class="d-flex justify-content-center">
+            <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
+            <i class="icon-bars-alt text-pink-300"></i>
+            <span>Statistics</span>
+            </a>
+            <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
+            <i class="icon-calculator text-pink-300"></i>
+            <span>Invoices</span>
+            </a>
+            <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
+            <i class="icon-calendar5 text-pink-300"></i>
+            <span>Schedule</span>
+            </a>
+         </div>
+      </div>
+      {% endcomment %}
+   </div>
+</div>
+<!-- /page header -->
+<div class="content">
+<p></p>
+<div class="card" style="height:70px">
+<div class="container">
+    <div class="row">
+    {% if papers.OrderStatus == "Pending"%}
+    {% if papers.BidOption == "none"%}
+    
+    <div class="col-lg-10" style="margin-top:20px" >
+                 <h6 style="text-align:center"> This paper is available for you to pick</h6>
+              </div>
+              <div class="col-lg-2" style="margin-top:15px" >
+                 <a href="{% url 'TakeOrder' papers.id  %}"> <button type="button" class="btn bg-teal-400 btn-labeled btn-labeled-left"><b><i class="icon-reading"></i></b> Take</button></a>
+              </div>
+    {% elif papers.BidOption == "Bid" %}
+
+    <div class="col-lg-10" style="margin-top:20px" >
+                 <h6 style="text-align:center"> Place your bid if you are ready to execute this order for {% if AccountType == "ENL" %}
+                           ${{papers.ENL|floatformat}}
+                            {% elif AccountType == "ESL" %}
+                            ${{papers.ESL|floatformat}}
+                            {% else %}
+                            -
+                            {% endif %}
+                 
+                 </h6>
+              </div>
+              <div class="col-lg-2" style="margin-top:15px" >
+                  <a href="{% url 'BidOrder' papers.id  %}"> <button type="button" class="btn bg-teal-400 btn-labeled btn-labeled-left"><b><i class="icon-reading"></i></b> Bid</button></a>
+    </div>
+
+    {% elif papers.BidOption == "Time Bid" %}
+{% comment %} <form action="{% url 'BidTime' papers.id  %}" method="POST" >
+              {% csrf_token %} {% endcomment %}
+            <div class="col-lg-6" style="margin-top:20px" >
+                 <h6 style="text-align:center"> Place your bid if you are ready to execute this order for {% if AccountType == "ENL" %}
+                           ${{papers.ENL|floatformat}}
+                            {% elif AccountType == "ESL" %}
+                            ${{papers.ESL|floatformat}}
+                            {% else %}
+                            -
+                            {% endif %}</h6>
+              </div>
+              
+              <div class="col-lg-2" style="margin-top:20px" >
+              
+                     <input type="text" class="form-control" name="Days" id="Days" placeholder="Days">
+               
+              
+              </div>
+              <div class="col-lg-2" style="margin-top:20px" >
+              
+              <input type="text" class="form-control" name="Time" id="Time" placeholder="Time">
+              <input type="text" class="form-control" style="display:none" name="Paper" id="Paper" value="{{papers.id}}" placeholder="Time">
+              </div>
+              <div class="col-lg-2" style="margin-top:15px" >
+                  <button type="button" onclick="myFunction()" class="btn bg-teal-400 btn-labeled btn-labeled-left"><b><i class="icon-reading"></i></b> Bid</button>
+    </div>
+    {% comment %} </form> {% endcomment %}
+
+     {% elif papers.BidOption == "Money Bid" %}
+
+    <div class="col-lg-8" style="margin-top:20px" >
+                 <h6 style="text-align:center"> Place your bid if you are ready to execute this order for {% if AccountType == "ENL" %}
+                           ${{papers.ENL|floatformat}}
+                            {% elif AccountType == "ESL" %}
+                            ${{papers.ESL|floatformat}}
+                            {% else %}
+                            -
+                            {% endif %}</h6>
+              </div>
+              <div class="col-lg-2" style="margin-top:20px" >
+              
+              <input type="text" class="form-control" name="Amount" id="Amount" value="${{papers.ENL|floatformat}}"
+         placeholder="Amount">
+              <input type="text" class="form-control" style="display:none" name="Paper" id="Paper" value="{{papers.id}}" placeholder="Time">
+              </div>
+              <div class="col-lg-2" style="margin-top:15px" >
+                  <button type="button" onclick="myFunction1()" class="btn bg-teal-400 btn-labeled btn-labeled-left"><b><i class="icon-reading"></i></b> Bid</button>
+    </div>
+    {% else%}
+    <div class="col-lg-6" style="margin-top:20px" >
+                 <h6 style="text-align:center"> Place your bid if you are ready to execute this order for {% if AccountType == "ENL" %}
+                           ${{papers.ENL|floatformat}}
+                            {% elif AccountType == "ESL" %}
+                            ${{papers.ESL|floatformat}}
+                            {% else %}
+                            -
+                            {% endif %}</h6>
+              </div>
+              <div class="col-lg-1" style="margin-top:20px" >
+              
+                     <input type="text" class="form-control" id="Days" placeholder="Days">
+               
+              
+              </div>
+              <div class="col-lg-1" style="margin-top:20px" >
+              
+              <input type="text" class="form-control" id="Time" placeholder="Time">
+              </div>
+              <div class="col-lg-2" style="margin-top:20px" >
+              
+              <input type="text" class="form-control" id="Amount" placeholder="Amount">
+              <input type="text" class="form-control" style="display:none" name="Paper" id="Paper" value="{{papers.id}}" placeholder="Time">
+              
+              </div>
+              <div class="col-lg-2" style="margin-top:15px" >
+                  <button type="button" onclick="myFunction2()" class="btn bg-teal-400 btn-labeled btn-labeled-left"><b><i class="icon-reading"></i></b> Bid</button>
+    </div>
+
+    {% endif %}
+    {% elif papers.OrderStatus == "Assigned" %}
+
+    <div class="col-lg-10" style="margin-top:20px" >
+                 
+              </div>
+              <div class="col-lg-2" style="margin-top:15px" >
+                 <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_iconified" data-backdrop="static" data-keyboard="false" >Submit <i class="icon-play3 ml-2"></i></button></td>
+              </div>
+    {%else%}
+
+    {% endif %}
+              
+        
+        </div>
+    </div>
+</div>
+<div class="row">
+
+   <div class="col-xl-7">
+      <div class="card">
+      <div class="container">
+    <div class="row">
+       <div class="col-xs-6 col-sm-6 col-md-7">
+          <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Price</td>
+                            {% if AccountType == "ENL" %}
+                            <td>${{papers.ENL|floatformat}}</td>
+                            {% elif AccountType == "ESL" %}
+                            <td>${{papers.ESL|floatformat}}</td>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Deadline</td>
+                            <td>{{papers.createdAt}}</td>
+                        </tr>
+                        <tr>
+                            <td>Pages</td>
+                            <td>{{papers.Pages}} Pages</td>
+                        </tr>
+                        <tr>
+                            <td>Type of Paper</td>
+                            <td>{{papers.TypeOfPaper}}</td>
+                        </tr>
+                        <tr>
+                            <td>Discpline</td>
+                            <td>{{papers.Discipline}}</td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td>{{papers.Title}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sources to be cited</td>
+                            <td>{{papers.Sources}}</td>
+                        </tr>
+                        <tr>
+                            <td>Paper Format </td>
+                            <td>{{papers.PaperPref}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+       </div>
+       <div class="col-xs-6 col-sm-6 col-md-5">
+
+       <div class="card-inner">
+                                       <div class="project">
+                                          <div class="project-head">
+                                             <a href="html/apps-kanban.html" class="project-title">
+                                                <div class="project-info">
+                                                   <h6 class="title">Project Description</h6>
+                                                </div>
+                                             </a>
+                                          </div>
+                                          <div class="project-details">
+                                             <p>{{papers.Description}}</p>
+                                          </div>
+                                          <p style="margin-top:60%"><a href="{% url 'DownloadFiles' papers.Orderid  %}"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Folder_open_alt_font_awesome.svg/512px-Folder_open_alt_font_awesome.svg.png" style="width:30px">&nbsp;&nbsp; Download Files</a></p>
+                                       </div>
+                                    </div>
+         
+
+
+
+       </div>
+   </div>
+   </div>
+      
+            
+            {% comment %} <div class="col-xl-4">
+            shshsh
+            </div> {% endcomment %}
+      </div>
+   </div>
+   <div class="col-xl-5">
+      <div class="card"> 
+
+      <div class="card-body">
+									<ul class="media-list media-chat media-chat-scrollable mb-3">
+										<li class="media content-divider justify-content-center text-muted mx-0">Today</li>
+
+										
+                                       {% for message in messages%}
+                                       {% if message.From == "Student" %}
+										<li class="media">
+											<div class="mr-3">
+												<a href="">
+													<img src="{% static "assets1/global_assets/images/placeholders/placeholder.jpg" %}" class="rounded-circle" width="40" height="40" alt="">
+												</a>
+											</div>
+
+											<div class="media-body">
+												<div class="media-chat-item">{{message.Message}}</div>
+												{% comment %} <div class="font-size-sm text-muted mt-2">13 minutes ago <a href="#"><i class="icon-pin-alt ml-2 text-muted"></i></a></div> {% endcomment %}
+											</div>
+										</li>
+                                        {% else %}
+
+										<li class="media media-chat-item-reverse">
+											<div class="media-body">
+												<div class="media-chat-item">{{message.Message}}</div>
+												{% comment %} <div class="font-size-sm text-muted mt-2">2 hours ago <a href="#"><i class="icon-pin-alt ml-2 text-muted"></i></a></div> {% endcomment %}
+											</div>
+
+											<div class="ml-3">
+												<a href="">
+													<img src="{% static "assets1/global_assets/images/placeholders/placeholder.jpg" %}" class="rounded-circle" width="40" height="40" alt="">
+												</a>
+											</div>
+										</li>
+                                        {% endif %}
+                                        {% endfor %}
+									</ul>
+                                    <form action="{% url 'SendMessage'  %}" method="POST">
+                                {% csrf_token %} 
+                                <input type="text" name="PaperId" value="{{papers.id}}" style="display:none">
+
+			                    	<textarea name="message" class="form-control mb-3" rows="3" cols="1" placeholder="Enter your message..."></textarea>
+
+			                    	<div class="d-flex align-items-center">
+			                    		{% comment %} <div class="list-icons list-icons-extended">
+			                                <a href="#" class="list-icons-item" data-popup="tooltip" data-container="body" title="Send photo"><i class="icon-file-picture"></i></a>
+			                            	<a href="#" class="list-icons-item" data-popup="tooltip" data-container="body" title="Send video"><i class="icon-file-video"></i></a>
+			                                <a href="#" class="list-icons-item" data-popup="tooltip" data-container="body" title="Send file"><i class="icon-file-plus"></i></a>
+			                    		</div> {% endcomment %}
+
+			                    		<button type="submit" class="btn bg-teal-400 btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> Send</button>
+			                    	</div>
+                                    </form>
+								</div>
+							</div>
+						</div>               
+         
+      </div>
+   </div>
+</div>
+
+
+            <div id="modal_iconified" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Submit Assignment</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<div class="alert alert-info alert-dismissible alert-styled-left border-top-0 border-bottom-0 border-right-0">
+					                <span class="font-weight-semibold">Here we go!</span> Do you want to submit the paper.
+					                <button type="button" class="close" data-dismiss="alert">×</button>
+					            </div>
+
+								<h6 class="font-weight-semibold"><i class="icon-law mr-2"></i> file upload</h6>
+								<div class="form-group row">
+								
+								<div class="col-lg-10">
+									<input type="file" class="form-control" id="upload_file" data-import-url="{% url 'SubmitFiles' %}" data-csrf-token="{{ csrf_token }}" multiple="multiple" >
+									<input type ="text" id="Orderid" value="{{papers.Orderid}}" style="display:none">
+								</div>
+							</div>
+
+								<hr>
+
+                                <table class="table">
+    
+    <tbody>
+    {% for g in gfiles %}
+      <tr>
+        <td><span style="color:blue">{{g.FileName}}</span></td>
+        <td><input type="text" class="form-control" placeholder="description" ></td>
+        <td><a href="{% url 'DeleteFile' g.id  %}"><img src="https://desight.pro/upload/img/linerix-free/trash-577ac11d1a232-big.png" style="width:30px"></a></td>
+      </tr>
+
+      {% endfor %}
+      
+    </tbody>
+  </table>
+
+								
+							</div>
+
+							<div class="modal-footer">
+								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> Close</button>
+								<a href="{% url 'SubmitOrder' papers.id  %}"><button class="btn bg-primary"><i class="icon-checkmark3 font-size-base mr-1"></i> Submit</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+<style>
+
+</style>
+{% endblock content %}

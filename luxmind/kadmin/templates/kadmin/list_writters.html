@@ -1,0 +1,110 @@
+
+{% extends "kadmin/base.html" %}
+
+{% block content %}
+{% load static  %}
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Writters</h2>
+                            <div class="breadcrumb-wrapper">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'AdminDashbard'  %}">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#">Writters</a>
+                                    </li>
+                                    
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                    <div class="form-group breadcrumb-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="app-todo.html"><i class="mr-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="mr-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="mr-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-12">
+                        
+                    </div>
+                </div>
+                <!-- Basic table -->
+                <section id="basic-datatable">
+                    <div class="row">
+                        <div class="col-12">
+                        
+                            <div class="card">
+                                <div class="card-body">
+                                <div class="text-right">
+                                    {% comment %} <a href="{% url 'PricePerPage_Add'  %}">
+                                    <button type="button" class="btn btn-primary">+ Add New Record</button>
+                                    </a> {% endcomment %}
+                                </div>
+                                    <table class="datatables-basic table" id="example">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>PhoneNumber</th>
+                                                <th>Country</th>
+                                                <th>Language</th>
+                                                <th>Date Created</th>
+                                                <th>Status</th>
+                                                <th>Rating</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for klist in list%}
+                                            <tr>
+                                                
+                                                <td><a href="{% url 'Writter_Edit' klist.id %}" >{{klist.Firstname}} {{klist.LastName}}</a></td>
+                                                <td>{{klist.Email}}</td>
+                                                <td>{{klist.PhoneNumber}}</td>
+                                                <td>{{klist.Country}}</td>
+                                                <td>{{klist.Language}}</td>
+                                                <td>{{klist.createdAt}}</td>
+                                                <td>{{klist.Status}}</td>
+                                                <td>{{klist.Score}}</td>
+                                                
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </section>
+                <!--/ Basic table -->
+
+                
+
+                
+
+               
+
+            </div>
+        </div>
+    </div>
+    <script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+    </script>
+    
+
+    {% endblock content %}

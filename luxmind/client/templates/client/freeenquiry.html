@@ -1,0 +1,140 @@
+{% extends "client/base.html" %}
+
+{% block content %}
+{% load static  %}
+
+
+<div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            
+            <div class="content-body">
+                <!-- Basic tabs start -->
+                <section id="basic-tabs-components">
+                    <div class="row match-height">
+                        <!-- Basic Tabs starts -->
+                        <div class="col-xl-12 col-lg-12">
+
+
+                        <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Free Enquiry</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form class="form form-vertical" action="PlaceEnquiry" enctype="multipart/form-data" method="POST">
+                                       {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="first-name-vertical">Type of Paper</label>
+                                                  
+                                        <select name="TypeOfPaper" class="form-control" id="TypeOfPaper" onchange="myFunction()">
+                            {% if details.TypeOfPaper == "" %}
+                            <option>Select your Type</option>
+                            {% else %}
+                            <option value={{details.TypeOfPaper}}>{{details.TypeOfPaper}}</option>
+
+                            {%endif%}
+                                {% for p in paper %}
+                                <option value={{p.Name}}>{{p.Name}}</option>
+                                {% endfor %}
+                            </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="email-id-vertical">Discpline</label>
+                                                    <select class="form-control" name="Discipline" id="Discipline" onchange="myFunction()">
+                               {% if details.Discipline == "" %}
+                                <option>Select your Type</option>
+                                {% else %}
+                                <option value={{details.Discipline}}>{{details.Discipline}}</option>
+
+                                {%endif%}
+                               
+                                {% for k in discpline %}
+                                <option value={{k.Name}}>{{k.Name}}</option>
+                                {% endfor %}
+                            </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="email-id-vertical">Academic Level</label>
+                                                    <select class="form-control" name="AcademicLevel" id="Discipline" onchange="myFunction()">
+                               
+                                <option value="High School">High School</option>
+                                <option value="Undergraduate(1-2Yrs)">Undergraduate(1-2Yrs)</option>
+                                <option value="Undergraduate(3-4Yrs)">Undergraduate(3-4Yrs)</option>
+                                <option value="Graduate">Graduate</option>
+                                <option Value="PHD">PHD</option>
+                                
+                            </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="password-vertical">Paper Instructions</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="Description" placeholder="Textarea"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="password-vertical">Additional Materials</label>
+                                                    <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="customFile" multiple name="myfile" />
+                                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="password-vertical">Pages</label>
+                                                    <div class="input-group">
+                                                <input type="text" class="touchspin-color" value="2" data-bts-button-down-class="btn btn-primary" name="Pages" data-bts-button-up-class="btn btn-primary" />
+                                            <span align="center">(550 Words)</span>
+                                            </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="password-vertical">Spacing</label><br />
+                                                     <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Spacing" id="inlineRadio1" value="Double" checked />
+                                            <label class="form-check-label" for="inlineRadio1">Double</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Spacing" id="inlineRadio2" value="Single" />
+                                            <label class="form-check-label" for="inlineRadio2">Single</label>
+                                        </div>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary mr-1">Submit</button>
+                                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        <!-- Basic Tabs ends -->
+
+                        
+                        <!-- Vertical Right Tabs ends -->
+                    </div>
+                </section>
+                <!-- Vertical Tabs end -->
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}

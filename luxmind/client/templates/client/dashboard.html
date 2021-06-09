@@ -1,0 +1,129 @@
+{% extends "client/base.html" %}
+
+{% load static  %}
+
+<!-- BEGIN: Content-->
+{% block body %}
+      {%if messages%}
+			<div class="row my-3">
+				<div class="col-xl-8 col-sm-6 offset-xl-2 offset-sm-3">
+					<div>
+						{% for message in messages %}
+						  <div class="alert alert-{{message.tags}} alert-dismissible text-center" role="alert">
+							{{message}}
+							<button type="button" class="close" data-dismiss="alert">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						  </div>
+						{%endfor%}
+					 </div>
+				</div>
+			</div>
+        {%endif%}
+
+<!-- end of message div -->
+
+<div class="container-fluid">
+	<div class="row my-3">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header header-elements-inline">
+						<h6 class="card-title btn btn-primary" style="background:rgb(41,58,89); margin-left:20px; width:150px;">My Orders</h6>
+						<div class="header-elements">
+							<div class="list-icons">
+								<a class="list-icons-item" data-action="collapse"></a>
+								<a class="list-icons-item" data-action="reload"></a>
+								<a class="list-icons-item" data-action="remove"></a>
+							</div>
+						</div>
+				</div>
+
+				<div class="card-body">
+					<div class="d-lg-flex" >
+						<ul class="nav nav-pills  flex-column mr-lg-3 wmin-lg-250 mb-lg-0" style="font-size:15px;border-right: 1px solid rgb(240, 234, 234);">
+							<li class="nav-item">
+								<a href="#stacked-left-pill1" class="nav-link active" data-toggle="tab">
+									<i class="fas fa-history"></i> Recent
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="#stacked-left-pill2" class="nav-link" data-toggle="tab">
+									<i class="fas fa-check" style="color:green;"></i> Completed
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="#stacked-left-pill3" class="nav-link" data-toggle="tab">
+									<i class="fas fa-times" style="color:red;"></i> Canceled
+								</a>
+							</li>
+						</ul>
+						<div class="container-fluid">
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="stacked-left-pill1">
+										 <div class="table-responsive">
+										<table class="table table-striped">
+											<thead>
+											<!-- dummy data -->
+												<tr>
+													<th>Order</th>
+													<th>Paper</th>
+													<th>Cost</th>
+													<th>View</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Mark</td>
+													<td>Otto</td>
+													<td>@mdo</td>
+													<td>
+														<a class="btn btn-primary btn-sm" href="{% url 'client:OrderPaper' %}">
+															<i class="fas fa-eye"></i> View
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>Mark</td>
+													<td>Otto</td>
+													<td>@TwBootstrap</td>
+													<td>
+														<a class="btn btn-primary btn-sm" href="{% url 'client:OrderPaper' %}">
+															<i class="fas fa-eye"></i> View
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>Jacob</td>
+													<td>Thornton</td>
+													<td>@fat</td>
+													<td><i class="fas fa-plus"></i> </td>
+												</tr>
+												<tr>
+													<td>3</td>
+													<td>Larry the Bird</td>
+													<td>@twitter</td>
+													<td><i class="fas fa-plus"></i> </td>
+												</tr>
+												<!--/ end of dummy data -->
+											</tbody>
+										</table>
+								</div>
+								</div>
+								<!-- completed and canceled tabs -->
+								<div class="tab-pane fade" id="stacked-left-pill2">
+									Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid laeggin.
+								</div>
+
+								<div class="tab-pane fade" id="stacked-left-pill3">
+									DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg whatever.
+								</div>
+								<!-- /completed and canceled tabs -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

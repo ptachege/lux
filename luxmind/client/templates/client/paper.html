@@ -1,0 +1,374 @@
+{% extends 'client/base.html' %}
+{% block stylehead %}
+<style>
+.message  {
+    letter-spacing: 1px;
+    width: 100%;
+    padding: 5px;
+    border:solid 1px rgb(41,58,89);
+    font-size: 14px;
+    border-radius:5px;
+    font-weight: 400;
+    background:white;
+    color: black;
+    box-shadow: 0 0.45rem 0.75rem rgba(0, 0, 0, 0.1);
+  }
+.message:focus{
+    outline:none;
+    border:solid 1px rgb(41,58,89);
+
+}
+.fa-plus{
+    cursor: pointer;
+}
+  </style>
+
+{% endblock stylehead %}
+
+{% block body %}
+<!-- display appropriate messages -->
+{%if messages%}
+    <div class="row my-3">
+		<div class="col-xl-8 col-sm-6 offset-xl-2 offset-sm-3">
+		<div>
+			{% for message in messages %}
+			  <div class="alert alert-{{message.tags}} alert-dismissible text-center" role="alert">
+				{{message}}
+				<button type="button" class="close" data-dismiss="alert">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			{%endfor%}
+		 </div>
+		</div>
+    </div>
+{%endif%}
+<!-- /display appropriate messages -->
+
+        <div class="container">
+            <div class="row my-3">
+                <div class="col-md-12">
+                    <div class="card" >
+                        <div class="card-header header-elements-inline">
+                            <h6 class="card-title font-weight-bolder">Female Agency In Romea And Juliet</h6>
+                            <div class="header-elements">
+                                <div class="list-icons">
+                                    <a class="list-icons-item" data-action="collapse"></a>
+                                    <a class="list-icons-item" data-action="reload"></a>
+                                    <a class="list-icons-item" data-action="remove"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header header-elements-inline">
+                            <!--ToDo add the static header here -->
+                        </div>
+
+                            <ul  class="nav nav-tabs nav-tabs-bottom nav-justified" style="background:rgb(241, 236, 236); margin-bottom:3px;">
+                                <li class="nav-item"><a href="#bottom-justified-tab1" class="nav-link active" data-toggle="tab"><i class="fas fa-file"></i> &nbsp;Paper Instructions</a></li>
+                                <li class="nav-item"><a href="#bottom-justified-tab2" class="nav-link" data-toggle="tab"> <i class="fas fa-file-alt"></i> Files</a></li>
+                                <li class="nav-item"><a href="#bottom-justified-tab3" class="nav-link" data-toggle="tab"><i class="fas fa-comments"></i> Messages</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- tab contents begins here -->
+                        <div class="tab-content">
+                                <!--paper instruction tab contents begins here -->
+                                <div class="tab-pane fade show active" id="bottom-justified-tab1">
+                                    <div class="card">
+                                    <div class="card-body my-4 mb-3">
+                                        <p>
+                                            Summaries. A retired CIA agent travels across Europe and relies on his old skills to save his estranged daughter, who has been kidnapped while on a trip to Paris. ... Her father gets to speak briefly to one of the kidnappers and he promises to kill the kidnappers if they do not let his daughter go free.
+                                            Summaries. A retired CIA agent travels across Europe and relies on his old skills to save his estranged daughter, who has been kidnapped while on a trip to Paris. ... Her father gets to speak briefly to one of the kidnappers and he promises to kill the kidnappers if they do not let his daughter go free.
+                                            Summaries. A retired CIA agent travels across Europe and relies on his old skills to save his estranged daughter, who has been kidnapped while on a trip to Paris. ... Her father gets to speak briefly to one of the kidnappers and he promises to kill the kidnappers if they do not let his daughter go free.
+                                            Summaries. A retired CIA agent travels across Europe and relies on his old skills to save his estranged daughter, who has been kidnapped while on a trip to Paris. ... Her father gets to speak briefly to one of the kidnappers and he promises to kill the kidnappers if they do not let his daughter go free.
+                                        </p>
+                                    </div>
+                                    </div>
+
+                                    <div class="card">
+                                    <div class="card-header bg-white header-elements-inline">
+                                        <h6 class="card-title font-weight-bold">Additional Services.</h6>
+                                        <div class="header-elements">
+                                            <div class="list-icons">
+                                                <a class="list-icons-item" data-action="collapse"></a>
+                                                <a class="list-icons-item" data-action="move"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <div class="card-body my-4">
+                                             <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Type Of Service</th>
+                                                        <th>Time Remaining</th>
+                                                        <th>Additional Price</th>
+                                                        <th>Add</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>@mdo</td>
+                                                        <td><i class="fas fa-plus"></i> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>@TwBootstrap</td>
+                                                        <td><i class="fas fa-plus"></i> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jacob</td>
+                                                        <td>Thornton</td>
+                                                        <td>@fat</td>
+                                                        <td><i class="fas fa-plus"></i> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Larry the Bird</td>
+                                                        <td>@twitter</td>
+                                                        <td><i class="fas fa-plus"></i> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--tab contents ends here -->
+
+
+                                <!--files tab contents begins here -->
+                                <div class="tab-pane fade" id="bottom-justified-tab2">
+                                    <div class="card">
+                                        <div class="card-header bg-white header-elements-inline">
+                                            <h6 class="card-title font-weight-bold">Writer.</h6>
+                                            <div class="header-elements">
+                                                <div class="list-icons">
+                                                    <a class="btn btn-sm btn-primary" style="color:#fff;">Upload New Files <i style="color:white;" class="fas fa-paper-plane"></i> </a>
+                                                    <a class="list-icons-item" data-action="move"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                            <div class="card-body my-4">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Type Of Service</th>
+                                                                <th>Time Remaining</th>
+                                                                <th>Additional Price</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>mwaniki</td>
+                                                                <td>Otto</td>
+                                                                <td>@mdo</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                                <td>@TwBootstrap</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                                <td>@fat</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Larry the Bird</td>
+                                                                <td>@twitter</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                    </div>
+                                        <div class="card my-3">
+
+                                            <div class="card-header bg-white header-elements-inline">
+                                                <h6 class="card-title font-weight-bold">Customer(You).</h6>
+                                            </div>
+
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>mwaniki</td>
+                                                                <td>Otto</td>
+                                                                <td>@mdo</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                                <td>@TwBootstrap</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                                <td>@fat</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Larry the Bird</td>
+                                                                <td>@twitter</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!--second tab contents ends here -->
+
+                                <!--messages tab contents ends here -->
+                                <div class="tab-pane fade" id="bottom-justified-tab3">
+                                    <div class="card">
+                                        <div class="card-header bg-white header-elements-inline">
+                                            <h6 class="card-title font-weight-bold">My Messages</h6>
+                                            <div class="header-elements">
+                                                <div class="list-icons">
+                                                    <a class="btn btn-sm btn-primary" style="color:#fff;" data-toggle="modal" data-target="#modal_iconified">
+                                                        <i style="color:white;margin-right:5px;"  class="fas fa-comment-alt" ></i> New Messages</a>
+                                                    <a class="list-icons-item" data-action="move"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body my-4">
+                                            <div class="table-responsive">
+                                                 <table class="table table-striped">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col">To</th>
+                                                        <th scope="col">Subject</th>
+                                                        <th scope="col">Time</th>
+                                                        <th scope="col">Message</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for message in all_messages %}
+                                                      <tr class="accordion-toggle collapsed" id="accordion{{message.id}}" data-toggle="collapse" data-parent="#accordion{{message.id}}" href="#collapse{{message.id}}">
+                                                            <td>{{message.to}}</td>
+                                                            <td>{{message.subject}}</td>
+                                                            <td>{{message.date_time|timesince}}</td>
+                                                            <td class="expand-button" style="padding-left:40px;" id="message_display" >
+                                                                <i id="icon" class="fas fa-chevron-down"></i>
+                                                            </td>
+                                                      </tr>
+                                                      <tr class="hide-table-padding">
+                                                        <td></td>
+                                                        <td colspan="3">
+                                                            <div id="collapse{{message.id}}" class="collapse in p-3">
+                                                              <div class="row">
+                                                                <div class="col-12">
+                                                                    {{message.message}}
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                        </td>
+                                                      </tr>
+                                                    {% empty %}
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <h5 class="text-muted">
+                                                                You don't have any messages.
+                                                            </h5>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                 </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--tab contents ends here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- the modal it self -->
+<div id="modal_iconified" class="modal fade" tabindex="-1">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header"  style="background:rgb(41,58,89);color:#fff;padding-bottom:20px;">
+            <div class="container text-center">
+                <h5 class="modal-title"><i class="fas fa-comment mr-2"></i> &nbsp;New Message
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </h5>
+
+            </div>
+        </div>
+
+
+        <div class="modal-body">
+           <div class="container-fluid text-center">
+               <div class="card">
+                   <div class="card-body">
+
+                       <form action="{% url 'client:post_messages' %}"  method="POST">
+                           {% csrf_token %}
+                           <div class="row">
+                               <div class="col-md-10 offset-md-1">
+
+                                   <div class="form-group">
+                                       <label style="float:left;">
+                                          <span class="badge badge-danger" style="font-size:13px;"><b>To:</b></span>
+                                       </label>
+                                            <select class="form-control select" name="to" id="to" required data-fouc>
+                                                    <option>select recipient</option>
+                                                    <option value="chege">chege</option>
+                                                    <option value="peter">peter</option>
+                                                    <option value="njuguna">njuguna</option>
+                                            </select>
+                                    </div>
+                                   <div class="form-group row">
+                                        <label class="col-form-label col-lg-2">
+                                               <span class="badge badge-secondary" style="font-size:13px;"><b>Subject</b>
+                                               </span>
+                                        </label><br>
+                                        <div class="col-12">
+                                            <input required type="text" name="subject" id="subject" class="form-control message" placeholder="subject...">
+                                        </div>
+                                   </div>
+                                    <div class="form-group">
+                                         <textarea name="message" required placeholder="Type your message here..." class="form-control message" id="message" rows="5"></textarea>
+                                    </div>
+                                   <button class="btn btn-success" style="background:rgb(41,58,89);"><i class="fas fa-paper-plane mr-1"></i> Send</button>
+                               </div>
+                           </div>
+
+                       </form>
+                   </div>
+               </div>
+           </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<!-- /iconified modal -->
+<!--ToDo toggle between chevron up and down icons on row collapse. code below not working-->
+{% block scripts %}
+<script>
+
+    $('#message_display').click(function(){
+    $('#icon').slideToggle('500');
+    $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down')});
+</script>
+{% endblock scripts %}
+
+{% endblock %}

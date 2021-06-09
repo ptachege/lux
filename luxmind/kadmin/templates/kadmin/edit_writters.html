@@ -1,0 +1,319 @@
+
+{% extends "kadmin/base.html" %}
+
+{% block content %}
+{% load static  %}
+     <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="app-user-edit">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-pills" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account" aria-controls="account" role="tab" aria-selected="true">
+                                        <i data-feather="user"></i><span class="d-none d-sm-block">Account</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center" id="information-tab" data-toggle="tab" href="#information" aria-controls="information" role="tab" aria-selected="false">
+                                        <i data-feather="info"></i><span class="d-none d-sm-block">Information</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center" id="social-tab" data-toggle="tab" href="#social" aria-controls="social" role="tab" aria-selected="false">
+                                        <i data-feather="share-2"></i><span class="d-none d-sm-block">Documents</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <!-- Account Tab starts -->
+                                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                    <!-- users edit media object start -->
+                                    <div class="media mb-2">
+                                        <img src="http://127.0.0.1:8000/media/{{user.PassPort}}" alt="users avatar" class="user-avatar users-avatar-shadow rounded mr-2 my-25 cursor-pointer" height="90" width="90" />
+                                        <div class="media-body mt-50">
+                                            <h4>{{user.Firstname}} {{user.LastName}} </h4>
+                                            <div class="col-12 d-flex mt-1 px-0">
+                                                <label class="btn btn-primary mr-75 mb-0" for="change-picture">
+                                                    <span class="d-none d-sm-block">Change</span>
+                                                    <input class="form-control" type="file" id="change-picture" hidden accept="image/png, image/jpeg, image/jpg" />
+                                                    <span class="d-block d-sm-none">
+                                                        <i class="mr-0" data-feather="edit"></i>
+                                                    </span>
+                                                </label>
+                                                <button class="btn btn-outline-secondary d-none d-sm-block">Remove</button>
+                                                <button class="btn btn-outline-secondary d-block d-sm-none">
+                                                    <i class="mr-0" data-feather="trash-2"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- users edit media object ends -->
+                                    <!-- users edit account form start -->
+                                    <form class="form-validate" action="{% url 'UpdateAccount'  %}" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="username">Firstname</label>
+                                                    <input type="text" class="form-control" placeholder="Username" value="{{user.Firstname}}" name="username" id="username" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="name">MiddleName</label>
+                                                    <input type="text" class="form-control" placeholder="Name" value="{{user.Middlename}}" name="name" id="name" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="email">Lastname</label>
+                                                    <input type="text" class="form-control" placeholder="Email" value="{{user.LastName}}" name="email" id="email" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="status">Gender</label>
+                                                    <select class="form-control" id="status">
+                                                        <option>{{user.Gender}}</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="role">Phone</label>
+                                                    <select class="form-control" id="role">
+                                                        <option>{{user.PhoneNumber}}</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="company">Email</label>
+                                                    <input type="text" class="form-control" value="{{user.Email}}" placeholder="Company name" name="Email" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="company">Duration Points</label>
+                                                    <input type="text" class="form-control" value="{{user.DurationPoints}}" placeholder="Company name" name="DurationPoints" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="company">Lateness Points</label>
+                                                    <input type="text" class="form-control" value="{{user.LatenessPoints}}" placeholder="Company name" name="LatenessPoints" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="company">Dispute Points</label>
+                                                    <input type="text" class="form-control" value="{{user.DisputePoints}}" placeholder="Company name" name="DisputePoints" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="company">Request Points</label>
+                                                    <input type="text" class="form-control" value="{{user.RequestPoints}}" placeholder="Company name" name="RequestPoints" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="company">Score</label>
+                                                    <input type="text" readonly="" class="form-control" value="{{user.Score}}" placeholder="Company name" name="Score" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="status">Account Type</label>
+                                                    <select class="form-control" name="AccountType">
+                                                        <option value="{{user.AccountType}}">{{user.AccountType}}</option>
+                                                        <option value="ESL">ESL</option>
+                                                        <option value="ENL">ENL</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="status">Status</label>
+                                                    <select class="form-control" Name="Status">
+                                                        <option value="{{user.Status}}">{{user.Status}}</option>
+                                                        <option value="Account Activation pending">Account Activation pending</option>
+                                                        <option value="Actively working">Actively working</option>
+                                                        <option value="Suspended">Suspended</option>
+                                                        <option value="Working on assigned orders">Working on assigned orders</option>
+                                                        <option value="Account Deletion Pending">Account Deletion Pending</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="status">Quality Of Work</label>
+                                                    <select class="form-control" Name="QualityOfWork">
+                                                        <option value="{{user.QualityOfWork}}">{{user.QualityOfWork}}</option>
+                                                        <option value="High School">High School</option>
+                                                        <option value="Undergraduate (1-2)">Undergraduate (1-2)</option>
+                                                        <option value="Undergraduate (3-4)">Undergraduate (3-4)</option>
+                                                        <option value="Graduate">Graduate</option>
+                                                        <option value="Ph. D.">Ph. D.</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="status">Level</label>
+                                                    <select class="form-control" Name="Level">
+                                                        <option value="{{user.QualityOfWork}}">{{user.Level}}</option>
+                                                        <option value="A">A</option>
+                                                        <option value="B">B</option>
+                                                        <option value="C">C</option>
+                                                        <option value="D">D</option>
+                                                        
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="company">Quality Check Points</label>
+                                                    <input type="text" class="form-control" readonly="" value="{{user.QualityCheckPoints}}" placeholder="Company name" name="QualityCheckPoints" />
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                                <button type="submit" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1">Save Changes</button>
+                                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- users edit account form ends -->
+                                </div>
+                                <!-- Account Tab ends -->
+
+                                <!-- Information Tab starts -->
+                                <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
+                                    <!-- users edit Info form start -->
+                                    <form class="form-validate">
+                                        <div class="row mt-1">
+                                            
+                                            
+                                            
+                                            
+                                            <div class="col-12">
+                                                <h4 class="mb-1 mt-2">
+                                                    <i data-feather="map-pin" class="font-medium-4 mr-25"></i>
+                                                    <span class="align-middle">Address</span>
+                                                </h4>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="address-1">Address</label>
+                                                    <input id="address-1" type="text" class="form-control" value="{{user.Address}}" name="address" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="address-2">Level Of Education</label>
+                                                    <input id="address-2" type="text" class="form-control" value="{{user.LevelOfEducation}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="postcode">School</label>
+                                                    <input id="postcode" type="text" class="form-control" value="{{user.School}}" name="zip" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="city">City</label>
+                                                    <input id="city" type="text" class="form-control" value="{{user.City}}" name="city" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="state">SocialMedia</label>
+                                                    <input id="state" type="text" class="form-control" name="state" value="{{user.SocialMedia}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="country">Country</label>
+                                                    <input id="country" type="text" class="form-control" name="country" value="{{user.Country}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                                <button type="submit" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1">Save Changes</button>
+                                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- users edit Info form ends -->
+                                </div>
+                                <!-- Information Tab ends -->
+
+                                <!-- Social Tab starts -->
+                                <div class="tab-pane" id="social" aria-labelledby="social-tab" role="tabpanel">
+                                    <!-- users edit social form start -->
+                                    <form class="form-validate">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6 form-group">
+                                            <div class="form-group">
+                                                <label for="twitter-input">Id</label>
+                                                
+                                                        <img src="http://127.0.0.1:8000/media/{{user.IdNumber}}" style="max-width:120px">
+                                            </div>    
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 form-group">
+                                            <div class="form-group">
+                                                <label for="facebook-input">Certificate</label>
+                                                
+                                                    <img src="http://127.0.0.1:8000/media/{{user.Certificate}}" style="max-width:120px">
+                                            </div>   
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 form-group">
+                                            <div class="form-group">
+                                                <label for="instagram-input">Passport</label>
+                                                
+                                                    <img src="http://127.0.0.1:8000/media/{{user.PassPort}}" style="max-width:120px">
+                                            </div>    
+                                            </div>
+                                            
+
+                                            <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                                <button type="submit" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1">Save Changes</button>
+                                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- users edit social form ends -->
+                                </div>
+                                <!-- Social Tab ends -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- users edit ends -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+
+    {% endblock content %}

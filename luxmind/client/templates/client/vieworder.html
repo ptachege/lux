@@ -1,0 +1,238 @@
+{% extends "client/base.html" %}
+
+{% block content %}
+{% load static  %}
+
+
+<div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            
+            <div class="content-body">
+                <!-- Basic tabs start -->
+                <section id="basic-tabs-components">
+                    <div class="row match-height">
+                        <!-- Basic Tabs starts -->
+                        <div class="col-xl-12 col-lg-12">
+
+                        <div class="row">
+
+   <div class="col-xl-7">
+      <div class="card">
+      <div class="container">
+    <div class="row">
+       <div class="col-xs-6 col-sm-6 col-md-7">
+          <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Price</td>
+                            
+                            <td>${{papers.Amount|floatformat}}</td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Deadline</td>
+                            <td>{{papers.createdAt}}</td>
+                        </tr>
+                        <tr>
+                            <td>Pages</td>
+                            <td>{{papers.Pages}} Pages</td>
+                        </tr>
+                        <tr>
+                            <td>Type of Paper</td>
+                            <td>{{papers.TypeOfPaper}}</td>
+                        </tr>
+                        <tr>
+                            <td>Discpline</td>
+                            <td>{{papers.Discipline}}</td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td>{{papers.Title}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sources to be cited</td>
+                            <td>{{papers.Sources}}</td>
+                        </tr>
+                        <tr>
+                            <td>Paper Format </td>
+                            <td>{{papers.PaperPref}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+       </div>
+       <div class="col-xs-6 col-sm-6 col-md-5">
+
+       <div class="card-inner">
+                                       <div class="project">
+                                          <div class="project-head">
+                                             <a href="html/apps-kanban.html" class="project-title">
+                                                <div class="project-info">
+                                                   <h6 class="title">Project Description</h6>
+                                                </div>
+                                             </a>
+                                          </div>
+                                          <div class="project-details">
+                                             <p>{{papers.Description}}</p>
+                                          </div>
+                                          {% comment %} <p style="margin-top:60%"><a href="{% url 'DownloadFiles' papers.Orderid  %}"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Folder_open_alt_font_awesome.svg/512px-Folder_open_alt_font_awesome.svg.png" style="width:30px">&nbsp;&nbsp; Download Files</a></p> {% endcomment %}
+                                       </div>
+                                    </div>
+         
+
+
+
+       </div>
+   </div>
+
+   <div class="container">
+  
+  {% if papers.OrderStatus == "Pending" %}
+  {% else%}
+  <a href="{% url 'CompleteOrder' papers.id  %}"><button type="button" class="btn btn-primary">Complete</button></a>
+  <button type="button" class="btn btn-success">Revision</button>  
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Dispute</button>
+  {%endif%}
+    <p></p>   
+</div>
+   </div>
+
+
+   
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Raise A Dispute</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="col-sm-12 well">
+    <form accept-charset="UTF-8" action="{% url 'RaiseDispute'  %}" method="POST">
+    {% csrf_token %}
+    <select class="form-control" name="reason">
+    <option>Reason</option>
+    <option value="Bad Content">Bad Content</option>
+     <option value="Rude Writter">Rude Writter</option>
+    </select>
+    <input type="text" value="{{papers.id}}" name="orderid" style="display:none">
+    <p></p>
+        <textarea class="form-control" id="text" name="disputes" 
+      	 maxlength="200" placeholder="Type in your message" rows="5"></textarea>
+        <span class="pull-right label label-default" id="count_message"></span>
+      	<br>
+        <button class="btn btn-info" type="submit">Post Dispute</button>
+    </form>
+</div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
+            
+            {% comment %} <div class="col-xl-4">
+            shshsh
+            </div> {% endcomment %}
+      </div>
+   </div>
+   <div class="col-xl-5">
+      <div class="card"> 
+
+      <div class="card-body">
+									<ul class="media-list media-chat media-chat-scrollable mb-3">
+										<li class="media content-divider justify-content-center text-muted mx-0">Today</li>
+
+										
+                                       {% for message in messages%}
+                                       {% if message.From == "Tutor" %}
+										<li class="media">
+											<div class="mr-3">
+												<a href="">
+													<img src="{% static "assets1/global_assets/images/placeholders/placeholder.jpg" %}" class="rounded-circle" width="40" height="40" alt="">
+												</a>
+											</div>
+
+											<div class="media-body">
+												<div class="media-chat-item">{{message.Message}}</div>
+												{% comment %} <div class="font-size-sm text-muted mt-2">13 minutes ago <a href="#"><i class="icon-pin-alt ml-2 text-muted"></i></a></div> {% endcomment %}
+											</div>
+										</li>
+                                        {% else %}
+
+										<li class="media media-chat-item-reverse">
+											<div class="media-body">
+												<div class="media-chat-item">{{message.Message}}</div>
+												{% comment %} <div class="font-size-sm text-muted mt-2">2 hours ago <a href="#"><i class="icon-pin-alt ml-2 text-muted"></i></a></div> {% endcomment %}
+											</div>
+
+											<div class="ml-3">
+												<a href="">
+													<img src="{% static "assets1/global_assets/images/placeholders/placeholder.jpg" %}" class="rounded-circle" width="40" height="40" alt="">
+												</a>
+											</div>
+										</li>
+                                        {% endif %}
+                                        {% endfor %}
+									</ul>
+                                    <form action="{% url 'CSendMessage'  %}" method="POST">
+                                {% csrf_token %} 
+                                <input type="text" name="PaperId" value="{{papers.id}}" style="display:none">
+
+			                    	<textarea name="message" class="form-control mb-3" rows="3" cols="1" placeholder="Enter your message..."></textarea>
+
+			                    	<div class="d-flex align-items-center">
+			                    		{% comment %} <div class="list-icons list-icons-extended">
+			                                <a href="#" class="list-icons-item" data-popup="tooltip" data-container="body" title="Send photo"><i class="icon-file-picture"></i></a>
+			                            	<a href="#" class="list-icons-item" data-popup="tooltip" data-container="body" title="Send video"><i class="icon-file-video"></i></a>
+			                                <a href="#" class="list-icons-item" data-popup="tooltip" data-container="body" title="Send file"><i class="icon-file-plus"></i></a>
+			                    		</div> {% endcomment %}
+
+			                    		<button type="submit" class="btn bg-teal-400 btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> Send</button>
+			                    	</div>
+                                    </form>
+								</div>
+							</div>
+						</div>               
+         
+      </div>
+   </div>
+</div>
+
+
+
+                       
+                                
+                                
+                        </div>
+                        
+                        
+                        <!-- Basic Tabs ends -->
+
+                        
+                        <!-- Vertical Right Tabs ends -->
+                    </div>
+                </section>
+                <!-- Vertical Tabs end -->
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}
